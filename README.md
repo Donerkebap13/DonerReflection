@@ -1,3 +1,4 @@
+
 ![Doner Reflection](https://i.imgur.com/oDC0Brl.png)
 
 ![Release version](https://img.shields.io/badge/release-v1.0.0-blue.svg)
@@ -135,10 +136,16 @@ object.*(property.m_member) = 1337.f;
 ```
 ## Resolvers
 **DonerReflection** supports the possibility to apply a specific action to all members of a class with the usage of a **Resolver Class**.
+With no parameters:
+```c++
+Bar object;
+APPLY_RESOLVER_TO_OBJECT(object, Foo::CBarResolver)
+```
+With extra parameters:
 ```c++
 Bar object;
 rapidjson::Document root; // Example taken from project DonerSerializer
-APPLY_RESOLVER_TO_OBJECT(object, Foo::CBarResolver, root, /*>Any extra parameter needed by your resolver*/)
+APPLY_RESOLVER_WITH_PARAMS_TO_OBJECT(object, Foo::CBarResolver, root, /*Any extra parameter needed by your resolver*/)
 ```
 Where ``Foo::CBarResolver`` must implement a static method ``Apply`` as following:
 ```c++
@@ -162,4 +169,4 @@ namespace Foo
 	};
 }
 ```
-For a better understanding of the usage of **Resolvers**, again, I recommend you yo have a look at [Doner Serializer](https://github.com/Donerkebap13/DonerSerializer).
+For a better understanding of the usage of **Resolvers**, again, I recommend you yo have a look to [Doner Serializer](https://github.com/Donerkebap13/DonerSerializer).

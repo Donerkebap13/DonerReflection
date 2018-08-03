@@ -48,7 +48,14 @@
 #define DONER_DECLARE_OBJECT_AS_REFLECTABLE(base_class)                        \
   friend struct SDonerReflectionClassProperties<base_class>;
 
-#define APPLY_RESOLVER_TO_OBJECT(object_ref, resolver, ...)                    \
+#define APPLY_RESOLVER_TO_OBJECT(object_ref, resolver)                         \
+  DonerReflection::ApplyFunctionToObjectElements<                              \
+      SDonerReflectionClassProperties<typename std::decay<decltype(            \
+          object_ref)>::type>::s_propertiesCount -                             \
+          1,                                                                   \
+      resolver>(object_ref);
+
+#define APPLY_RESOLVER_WITH_PARAMS_TO_OBJECT(object_ref, resolver, ...)        \
   DonerReflection::ApplyFunctionToObjectElements<                              \
       SDonerReflectionClassProperties<typename std::decay<decltype(            \
           object_ref)>::type>::s_propertiesCount -                             \
