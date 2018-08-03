@@ -1,6 +1,6 @@
 
 # DonerReflection
-![Doner Reflection](https://i.imgur.com/QeFI0pl.png)
+![Doner Reflection](https://i.imgur.com/oDC0Brl.png)
 
 A C++14 header-only library to provide information about your class members.
 ## What is DonerReflection?
@@ -23,7 +23,7 @@ git clone https://github.com/Donerkebap13/DonerReflection.git
 
 You can contact me directly via [email](mailto:donerkebap13@gmail.com).
 Also, if you have any suggestion or you find any bug, please don't hesitate to [create a new Issue](https://github.com/Donerkebap13/DonerReflection/issues).
-If you decided to user **DonerReflection** in your project, I'll be glad to hear about it and post it here in the main page as an example!
+If you decide to start using **DonerReflection** in your project, I'll be glad to hear about it and post it here in the main page as an example!
 ## Some interesting usages
 ### Serialization
 As in the example mentioned above, [Doner Serializer](https://github.com/Donerkebap13/DonerSerializer) is a serialization library that uses the power of **DonerReflection** to serialize and deserialize your class data from/to JSON. This library can be easily extended to support any other kind of serialization such as XML or Binary thank to the power of **DonerReflection**.
