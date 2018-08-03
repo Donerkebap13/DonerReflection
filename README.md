@@ -6,7 +6,7 @@ A C++14 header-only library to provide information about your class members.
 ## What is DonerReflection?
 DonerReflection is a C++14 header-only library that provides you basic information about your class members, such as **member type** or **name**.
 
-It also provides a way for applying changes to this members by the use of **Resolver classes**. 
+It also provides a way for applying changes to this members by the use of **[Resolver Classes](#resolvers)**. 
 
 An example of the usage of this system can be found in [Doner Serializer](https://github.com/Donerkebap13/DonerSerializer), a serialization library that uses the power of **DonerReflection** to serialize and deserialize your class data from/to JSON.
 
@@ -23,12 +23,14 @@ git clone https://github.com/Donerkebap13/DonerReflection.git
 
 You can contact me directly via [email](mailto:donerkebap13@gmail.com).
 Also, if you have any suggestion or you find any bug, please don't hesitate to [create a new Issue](https://github.com/Donerkebap13/DonerReflection/issues).
+
 If you decide to start using **DonerReflection** in your project, I'll be glad to hear about it and post it here in the main page as an example!
 ## Some interesting usages
 ### Serialization
 As in the example mentioned above, [Doner Serializer](https://github.com/Donerkebap13/DonerSerializer) is a serialization library that uses the power of **DonerReflection** to serialize and deserialize your class data from/to JSON. This library can be easily extended to support any other kind of serialization such as XML or Binary thank to the power of **DonerReflection**.
 ### Editor 
 By using the information provided by **DonerReflection** and with the help of a UI library such as **QT**, you could end up with something similar to this dinamically:
+
 ![Reflection UI Example](https://i.imgur.com/UHWwsfY.png)
 ## How to use it
 DonerReflecion uses **three simple macros** to expose your class data.
