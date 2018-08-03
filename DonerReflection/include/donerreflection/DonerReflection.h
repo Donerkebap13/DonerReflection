@@ -48,6 +48,13 @@
 #define DONER_DECLARE_OBJECT_AS_REFLECTABLE(base_class)                        \
   friend struct SDonerReflectionClassProperties<base_class>;
 
+#define APPLY_RESOLVER_TO_OBJECT(object_ref, resolver, ...)                    \
+  DonerReflection::ApplyFunctionToObjectElements<                              \
+      SDonerReflectionClassProperties<typename std::decay<decltype(            \
+          object_ref)>::type>::s_propertiesCount -                             \
+          1,                                                                   \
+      resolver>(object_ref, __VA_ARGS__);
+
 template <typename T>
 struct SDonerReflectionClassProperties
 {
@@ -90,25 +97,5 @@ namespace DonerReflection
 	{
 		DoApplyFunctionToObjectElements<iteration, Resolver>(object, std::forward<Args>(args)...);
 		ApplyFunctionToObjectElements<iteration - 1, Resolver>(object, std::forward<Args>(args)...);
-	}
-
-	template <std::size_t iteration, typename Resolver, typename T>
-	void DoApplyFunctionToObjectElements(T& object)
-	{
-		constexpr auto property = std::get<iteration>(std::decay<SDonerReflectionClassProperties<T>>::type::s_properties);
-		Resolver::Apply(property.m_name, object.*(property.m_member));
-	}
-
-	template <std::size_t iteration, typename Resolver, typename T>
-	typename std::enable_if<(iteration == 0)>::type ApplyFunctionToObjectElements(T& object)
-	{
-		DoApplyFunctionToObjectElements<iteration, Resolver>(object);
-	}
-
-	template <std::size_t iteration, typename Resolver, typename T>
-	typename std::enable_if<(iteration > 0)>::type ApplyFunctionToObjectElements(T& object)
-	{
-		DoApplyFunctionToObjectElements<iteration, Resolver>(object);
-		ApplyFunctionToObjectElements<iteration - 1, Resolver>(object);
 	}
 }
