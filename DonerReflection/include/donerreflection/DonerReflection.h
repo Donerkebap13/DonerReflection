@@ -103,7 +103,7 @@ namespace DonerReflection
 	void DoApplyFunctionToObjectElements(T& object)
 	{
 		constexpr auto property = std::get<iteration>(std::decay<SDonerReflectionClassProperties<T>>::type::s_properties);
-		Resolver::Apply(property.m_name, object.*(property.m_member));
+		Resolver::Apply(property, object);
 	}
 
 	template <std::size_t iteration, typename Resolver, typename T>
