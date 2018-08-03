@@ -98,4 +98,24 @@ namespace DonerReflection
 		DoApplyFunctionToObjectElements<iteration, Resolver>(object, std::forward<Args>(args)...);
 		ApplyFunctionToObjectElements<iteration - 1, Resolver>(object, std::forward<Args>(args)...);
 	}
+
+	template <std::size_t iteration, typename Resolver, typename T>
+	void DoApplyFunctionToObjectElements(T& object)
+	{
+		constexpr auto property = std::get<iteration>(std::decay<SDonerReflectionClassProperties<T>>::type::s_properties);
+		Resolver::Apply(property.m_name, object.*(property.m_member));
+	}
+
+	template <std::size_t iteration, typename Resolver, typename T>
+	typename std::enable_if<(iteration == 0)>::type ApplyFunctionToObjectElements(T& object)
+	{
+		DoApplyFunctionToObjectElements<iteration, Resolver>(object);
+	}
+
+	template <std::size_t iteration, typename Resolver, typename T>
+	typename std::enable_if<(iteration > 0)>::type ApplyFunctionToObjectElements(T& object)
+	{
+		DoApplyFunctionToObjectElements<iteration, Resolver>(object);
+		ApplyFunctionToObjectElements<iteration - 1, Resolver>(object);
+	}
 }

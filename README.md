@@ -2,7 +2,7 @@
 
 ![Release version](https://img.shields.io/badge/release-v1.0.0-blue.svg)
 
-## A C++14 header-only library to provide information about your class members.
+## A C++14 header-only library to provide information about your class members
 
 **DonerReflection** is a C++14 header-only library that provides you basic information about your class members, such as **member type** or **name**.
 
