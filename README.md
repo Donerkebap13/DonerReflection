@@ -1,10 +1,10 @@
-
-# DonerReflection
 ![Doner Reflection](https://i.imgur.com/oDC0Brl.png)
 
-A C++14 header-only library to provide information about your class members.
-## What is DonerReflection?
-DonerReflection is a C++14 header-only library that provides you basic information about your class members, such as **member type** or **name**.
+![Release version](https://img.shields.io/badge/release-v1.0.0-blue.svg)
+
+## A C++14 header-only library to provide information about your class members.
+
+**DonerReflection** is a C++14 header-only library that provides you basic information about your class members, such as **member type** or **name**.
 
 It also provides a way for applying changes to this members by the use of **[Resolver Classes](#resolvers)**. 
 
@@ -84,7 +84,7 @@ DONER_DEFINE_REFLECTION_DATA(Foo::Bar,
 	DONER_ADD_NAMED_VAR_INFO(m_float, "charMander")
 )
 ```
-By doing this you allow DonerReflection to access private members information.
+By doing this you allow **DonerReflection** to access private members information.
 ### Inheritance
 DonerReflection doesn't support inheritance per se. If you want to serialize class members inherited from its upper class, you need to do as follows:
 ```c++
