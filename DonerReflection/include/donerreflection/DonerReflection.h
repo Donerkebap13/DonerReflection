@@ -55,8 +55,22 @@
           1,                                                                   \
       resolver>(object_ref);
 
+#define APPLY_RESOLVER_TO_CONST_OBJECT(object_ref, resolver)                   \
+  DonerReflection::ApplyFunctionToConstObjectElements<                         \
+      SDonerReflectionClassProperties<typename std::decay<decltype(            \
+          object_ref)>::type>::s_propertiesCount -                             \
+          1,                                                                   \
+      resolver>(object_ref);
+
 #define APPLY_RESOLVER_WITH_PARAMS_TO_OBJECT(object_ref, resolver, ...)        \
   DonerReflection::ApplyFunctionToObjectElements<                              \
+      SDonerReflectionClassProperties<typename std::decay<decltype(            \
+          object_ref)>::type>::s_propertiesCount -                             \
+          1,                                                                   \
+      resolver>(object_ref, __VA_ARGS__);
+
+#define APPLY_RESOLVER_WITH_PARAMS_TO_CONST_OBJECT(object_ref, resolver, ...)  \
+  DonerReflection::ApplyFunctionToConstObjectElements<                         \
       SDonerReflectionClassProperties<typename std::decay<decltype(            \
           object_ref)>::type>::s_propertiesCount -                             \
           1,                                                                   \
@@ -136,45 +150,45 @@ namespace DonerReflection
 	// Const Object with Args
 	// ----------------------
 	template <std::size_t iteration, typename Resolver, typename T, typename... Args>
-	void DoApplyFunctionToObjectElements(const T& object, Args&&... args)
+	void DoApplyFunctionToConstObjectElements(const T& object, Args&&... args)
 	{
 		constexpr auto property = std::get<iteration>(std::decay<SDonerReflectionClassProperties<T>>::type::s_properties);
 		Resolver::Apply(property, object, std::forward<Args>(args)...);
 	}
 
 	template <std::size_t iteration, typename Resolver, typename T, typename... Args>
-	typename std::enable_if<(iteration == 0)>::type ApplyFunctionToObjectElements(const T& object, Args&&... args)
+	typename std::enable_if<(iteration == 0)>::type ApplyFunctionToConstObjectElements(const T& object, Args&&... args)
 	{
-		DoApplyFunctionToObjectElements<iteration, Resolver>(object, std::forward<Args>(args)...);
+		DoApplyFunctionToConstObjectElements<iteration, Resolver>(object, std::forward<Args>(args)...);
 	}
 	
 	template <std::size_t iteration, typename Resolver, typename T, typename... Args>
-	typename std::enable_if<(iteration > 0)>::type ApplyFunctionToObjectElements(const T& object, Args&&... args)
+	typename std::enable_if<(iteration > 0)>::type ApplyFunctionToConstObjectElements(const T& object, Args&&... args)
 	{
-		DoApplyFunctionToObjectElements<iteration, Resolver>(object, std::forward<Args>(args)...);
-		ApplyFunctionToObjectElements<iteration - 1, Resolver>(object, std::forward<Args>(args)...);
+		DoApplyFunctionToConstObjectElements<iteration, Resolver>(object, std::forward<Args>(args)...);
+		ApplyFunctionToConstObjectElements<iteration - 1, Resolver>(object, std::forward<Args>(args)...);
 	}
 
 	// -------------------------
 	// Const Object without Args
 	// -------------------------
 	template <std::size_t iteration, typename Resolver, typename T>
-	void DoApplyFunctionToObjectElements(const T& object)
+	void DoApplyFunctionToConstObjectElements(const T& object)
 	{
 		constexpr auto property = std::get<iteration>(std::decay<SDonerReflectionClassProperties<T>>::type::s_properties);
 		Resolver::Apply(property, object);
 	}
 
 	template <std::size_t iteration, typename Resolver, typename T>
-	typename std::enable_if<(iteration == 0)>::type ApplyFunctionToObjectElements(const T& object)
+	typename std::enable_if<(iteration == 0)>::type ApplyFunctionToConstObjectElements(const T& object)
 	{
-		DoApplyFunctionToObjectElements<iteration, Resolver>(object);
+		DoApplyFunctionToConstObjectElements<iteration, Resolver>(object);
 	}
 
 	template <std::size_t iteration, typename Resolver, typename T>
-	typename std::enable_if<(iteration > 0)>::type ApplyFunctionToObjectElements(const T& object)
+	typename std::enable_if<(iteration > 0)>::type ApplyFunctionToConstObjectElements(const T& object)
 	{
-		DoApplyFunctionToObjectElements<iteration, Resolver>(object);
-		ApplyFunctionToObjectElements<iteration - 1, Resolver>(object);
+		DoApplyFunctionToConstObjectElements<iteration, Resolver>(object);
+		ApplyFunctionToConstObjectElements<iteration - 1, Resolver>(object);
 	}
 }
