@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0
+
+### Breaking Changes
+### Features
+### Hotfixes
+
 ## 1.1.0
 
 ### Features
