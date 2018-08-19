@@ -169,4 +169,5 @@ namespace Foo
 }
 ```
 **Note:** When passing const objects you must use ``APPLY_RESOLVER_TO_CONST_OBJECT`` or ``APPLY_RESOLVER_WITH_PARAMS_TO_CONST_OBJECT``.
+
 For a better understanding of the usage of **Resolvers**, again, I recommend you yo have a look to [Doner Serializer](https://github.com/Donerkebap13/DonerSerializer).
