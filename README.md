@@ -1,6 +1,6 @@
 ![Doner Reflection](https://i.imgur.com/oDC0Brl.png)
 
-![Release version](https://img.shields.io/badge/release-v1.0.0-blue.svg)
+![Release version](https://img.shields.io/badge/release-v1.1.0-blue.svg)
 
 ## A C++14 header-only library to provide information about your class members
 
